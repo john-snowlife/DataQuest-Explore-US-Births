@@ -1,0 +1,37 @@
+def min_max(dic) :
+    values_list = dic.values() 
+    max_value = max(values_list) 
+    min_value = min(values_list) 
+    return(max_value,min_value)
+    
+min_max_dow = min_max(cdc_dow_births)
+min_max_dow
+
+def calc_counts_value(data, column, value):
+    result_dict = {}
+    for row in data:
+        row_year = str(row[0])
+        row_col = row[column]
+        births = row[4]
+        if row_year in result_dict:
+            if row_col == value:
+                result_dict[row_year] = result_dict[row_year] + births
+        else: 
+            result_dict[row_year] = births
+    return result_dict
+    
+sat_count = calc_counts_value(cdc_list, 3, 6)
+sat_count
+def sat_count_diff(dic):
+    results_dic = {}
+    for key, value in dic.items():
+        prev_key = str(int(key) - 1)
+        first_check = dic.get(prev_key, "empty")
+        if first_check == "empty":
+            results_dic[key] = 0
+        else:
+            results_dic[key] = value - dic[prev_key]
+    return results_dic
+    
+sat_year_diffs = sat_count_diff(sat_count)
+sat_year_diffs
